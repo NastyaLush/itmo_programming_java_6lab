@@ -1,56 +1,48 @@
-# laba6
+## Stage 2 (Lab 6)
 
-Разделить программу из *лабораторной работы №5* на клиентский и серверный модули. Серверный модуль должен осуществлять выполнение команд по управлению коллекцией. Клиентский модуль должен в интерактивном режиме считывать команды, передавать их для выполнения на сервер и выводить результаты выполнения.
+Split the program from Lab Work No. 5 into client and server modules. The server module must execute commands for managing the collection. The client module must, in interactive mode, read commands, send them to the server for execution, and output the execution results.
 
-Необходимо выполнить следующие требования:
+### Requirements
 
-- Операции обработки объектов коллекции должны быть реализованы с помощью Stream API с использованием лямбда-выражений.
-- Объекты между клиентом и сервером должны передаваться в сериализованном виде.
-- Объекты в коллекции, передаваемой клиенту, должны быть отсортированы *по размеру*
-- Клиент должен корректно обрабатывать временную недоступность сервера.
-- Обмен данными между клиентом и сервером должен осуществляться по протоколу **TCP**
-- Для обмена данными на сервере необходимо использовать **потоки ввода-вывода**
-- Для обмена данными на клиенте необходимо использовать **сетевой канал**
-- Сетевые каналы должны использоваться в *неблокирующем режиме*.
+- Operations for processing collection objects must be implemented using the Stream API with lambda expressions.
+- Objects must be transferred between the client and server in serialized form.
+- Objects in the collection sent to the client must be sorted by size.
+- The client must correctly handle temporary server unavailability.
+- Data exchange between the client and server must use the TCP protocol.
+- On the server, input/output streams must be used for data exchange.
+- On the client, a network channel must be used for data exchange.
+- Network channels must be used in non-blocking mode.
 
-Обязанности серверного приложения:
+### Server application responsibilities
 
-- Работа с файлом, хранящим коллекцию.
-- Управление коллекцией объектов.
-- Назначение автоматически генерируемых полей объектов в коллекции.
-- Ожидание подключений и запросов от клиента.
-- Обработка полученных запросов (команд).
-- Сохранение коллекции в файл при завершении работы приложения.
-- Сохранение коллекции в файл при исполнении специальной команды, доступной только серверу (клиент такую команду отправить не может).
-- Серверное приложение должно состоять из следующих модулей (реализованных в виде одного или нескольких классов):
-- Модуль приёма подключений.
-- Модуль чтения запроса.
-- Модуль обработки полученных команд.
-- Модуль отправки ответов клиенту.
-- Сервер должен работать в однопоточном режиме.
+- Work with the file that stores the collection.
+- Manage the collection of objects.
+- Assign automatically generated fields for objects in the collection.
+- Wait for client connections and requests.
+- Process received requests (commands).
+- Save the collection to a file when the application terminates.
+- Save the collection to a file when executing a special command available only to the server (the client cannot send this command).
+- The server application must consist of the following modules (implemented as one or more classes):
+  - Connection acceptance module.
+  - Request reading module.
+  - Received command processing module.
+  - Response sending module.
+- The server must run in single-threaded mode.
 
+### Client application responsibilities
 
-Обязанности клиентского приложения:
+- Read commands from the console.
+- Validate input data.
+- Serialize the entered command and its arguments.
+- Send the command and its arguments to the server.
+- Process the server response (output the result of command execution to the console).
+- Remove the `save` command from the client application.
+- The `exit` command terminates only the client application.
 
-- Чтение команд из консоли.
-- Валидация вводимых данных.
-- Сериализация введённой команды и её аргументов.
-- Отправка полученной команды и её аргументов на сервер.
-- Обработка ответа от сервера (вывод результата исполнения команды в консоль).
-- Команду save из клиентского приложения необходимо убрать.
-- Команда exit завершает работу клиентского приложения.
+### Important
 
-*Важно! Команды и их аргументы должны представлять из себя объекты классов. Недопустим обмен "простыми" строками. Так, для команды add или её аналога необходимо сформировать объект, содержащий тип команды и объект, который должен храниться в вашей коллекции.*
+Commands and their arguments must be objects of classes. Exchanging “plain” strings is not allowed. For example, for the `add` command (or its equivalent), you must form an object containing the command type and the object that should be stored in your collection.
 
-Дополнительное задание:
-Реализовать логирование различных этапов работы сервера (начало работы, получение нового подключения, получение нового запроса, отправка ответа и т.п.) с помощью *Java Util Logging
+### Additional task
 
-Отчёт по работе должен содержать:
-
-- Текст задания.
-- Диаграмма классов разработанной программы (как клиентского, так и серверного приложения).
-- Исходный код программы.
-- Выводы по работе.
-- Вопросы к защите лабораторной работы:
-
-
+Implement logging of different server workflow stages (startup, new connection received, new request received, response sent, etc.) using **Java Util Logging**.
